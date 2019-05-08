@@ -1,0 +1,64 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: dev
+  application:
+    name: security
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  datasource:
+    name: security
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid配置
+    druid:
+      #监控统计拦截的filter
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://47.52.202.164:3306/springcloud?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true
+      username: root
+      password: Liuheming940311
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久检查一次，将空闲连接关闭
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'X'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCACHE 并指定每个连接上PSCACHE的大小，oracke为true，mysql为false 分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    host: 192.168.125.125
+    password: 1qaz2wsx@CJY
+    port: 6379
+    lettuce:
+      pool:
+        #最大等待时间
+        max-wait: 1000ms
+        #最大连接数
+        max-active: 20
+        #最大空闲数量
+        max-idle: 20
+        #最小空闲数
+        min-idle: 1
+      shutdown-timeout: 100ms
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lhm.springcloud.security.entity
+
+security:
+  loginAfterTime: 10
+  loginTimeLimit: 10
+logging:
+  level:
+    com.lhm.springcloud.security: DEBUG
