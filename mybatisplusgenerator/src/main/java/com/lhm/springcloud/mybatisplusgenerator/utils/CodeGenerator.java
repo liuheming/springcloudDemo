@@ -20,9 +20,9 @@ import java.util.Scanner;
 public class CodeGenerator {
 
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://47.52.202.164:3306/springcloud?useUnicode=true&useSSL=false&characterEncoding=utf8";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/springcloud?useUnicode=true&useSSL=false&characterEncoding=utf8";
     private static String username = "root";
-    private static String password = "Liuheming940311";
+    private static String password = "123456789";
     private static String author = "security";
 
     private static String modelName = "/security";
