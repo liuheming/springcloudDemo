@@ -50,4 +50,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         ResponseUtil.out(response, ResUtil.getJsonStr(ResultCode.OK,"登录成功",map));
     }
+
 }

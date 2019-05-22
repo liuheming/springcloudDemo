@@ -18,9 +18,9 @@ spring:
       #监控统计拦截的filter
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://47.52.202.164:3306/springcloud?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true
+      url: jdbc:mysql://127.0.0.1:3306/springcloud?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true
       username: root
-      password: Liuheming940311
+      password: 123456789
       initial-size: 1
       min-idle: 1
       max-active: 20
@@ -62,3 +62,7 @@ security:
 logging:
   level:
     com.lhm.springcloud.security: DEBUG
+
+#需要过滤的路径
+ignored:
+  urls:

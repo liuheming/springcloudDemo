@@ -17,8 +17,6 @@ import io.jsonwebtoken.Jwts;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -35,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JWT过滤器
+ * JWT过滤器1
  */
 
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
@@ -74,8 +72,8 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
-
-            e.toString();
+            ResponseUtil.out(response, ResUtil.getJsonStr(ResultCode.BAD_REQUEST, e.getMessage()));
+            return;
         }
 
         chain.doFilter(request, response);
@@ -122,8 +120,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             } catch (ExpiredJwtException e) {
                 throw new CommonException(ResultCode.BAD_REQUEST, "登录已失效，请重新登录");
             } catch (Exception e) {
-
-                ResponseUtil.out(response, ResUtil.getJsonStr(ResultCode.BAD_REQUEST, "解析token错误"));
+                throw new CommonException(ResultCode.BAD_REQUEST, "解析token错误");
             }
         }
         return null;
