@@ -6,7 +6,7 @@ springicloud
 
   子模块
   security
-  mybatisplusgenerator
+  mybatisplusgenerator（mybatisPlus代码生成模块）
    
    
   一、security（用户认证及鉴权服务）
@@ -21,7 +21,10 @@ springicloud
     password
     
   
-  二、mybatisplusgenerator（mybatisPlus代码生成模块）
+
+  
+  二、consul注册中心
+  详细介绍:https://blog.csdn.net/BecauseSy/article/details/90700231
   
   
   
