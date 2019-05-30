@@ -54,7 +54,7 @@ spring:
       shutdown-timeout: 100ms
   cloud:
     consul:
-      host: 47.103.37.69
+      host: 192.168.125.125
       port: 8500
       enabled: true
       discovery:
