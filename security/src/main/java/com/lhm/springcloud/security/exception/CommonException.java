@@ -36,7 +36,8 @@ public class CommonException extends Exception {
 		this.exceptionCode = exceptionCode;
 	}
 
-	public String getMessage() {
+	@Override
+    public String getMessage() {
 		return message;
 	}
 

@@ -24,6 +24,19 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
 
+    <dependencies>
+        <!-- 安全检查 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- consul注册中心 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+    </dependencies>
+
     <!-- springcloud G版 -->
     <dependencyManagement>
         <dependencies>

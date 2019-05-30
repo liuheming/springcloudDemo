@@ -124,27 +124,27 @@ public class DateUtil {
             System.out.println("增加天数以后的日期：" + enddate);
             return formatter.parse(enddate).getTime();
         } catch (ParseException e) {
-            return 0l;
+            return 0L;
         }
     }
 
     public static long getOneDayStartTimeStamp(String targetTime) {
         try {
-            long result = -1l;
+            long result = -1L;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             return formatter.parse(targetTime + " 00:00:00").getTime();
         } catch (ParseException e) {
-            return 0l;
+            return 0L;
         }
     }
 
     public static long getOneDayEndTimeStamp(String targetTime) {
         try {
-            long result = -1l;
+            long result = -1L;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             return formatter.parse(targetTime + " 23:59:59").getTime();
         } catch (ParseException e) {
-            return 0l;
+            return 0L;
         }
     }
 
@@ -603,17 +603,18 @@ public class DateUtil {
         int hour = 0;
         int minute = 0;
         int second = 0;
-        if (time <= 0)
+        if (time <= 0) {
             return "00:00:00";
-        else {
+        } else {
             minute = time / 60;
             if (minute < 60) {
                 second = time % 60;
                 timeStr = unitFormat(minute) + ":" + unitFormat(second);
             } else {
                 hour = minute / 60;
-                if (hour > 99)
+                if (hour > 99) {
                     return "99:59:59";
+                }
                 minute = minute % 60;
                 second = time - hour * 3600 - minute * 60;
                 timeStr = unitFormat(hour) + ":" + unitFormat(minute) + ":" + unitFormat(second);
@@ -624,10 +625,11 @@ public class DateUtil {
 
     public static String unitFormat(int i) {
         String retStr = null;
-        if (i >= 0 && i < 10)
+        if (i >= 0 && i < 10) {
             retStr = "0" + Integer.toString(i);
-        else
+        } else {
             retStr = "" + i;
+        }
         return retStr;
 
     }

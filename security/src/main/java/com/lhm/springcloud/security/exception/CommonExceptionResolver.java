@@ -21,6 +21,7 @@ public class CommonExceptionResolver implements HandlerExceptionResolver {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
+    @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                          Exception ex) {
         if (ex instanceof CommonException) {

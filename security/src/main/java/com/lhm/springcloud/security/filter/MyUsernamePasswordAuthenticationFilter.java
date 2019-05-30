@@ -41,10 +41,12 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
             password = jsonObj.getString("password");
         }
 
-        if (username == null)
+        if (username == null) {
             username = "";
-        if (password == null)
+        }
+        if (password == null) {
             password = "";
+        }
         username = username.trim();
         //封装到security提供的用户认证接口中
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(

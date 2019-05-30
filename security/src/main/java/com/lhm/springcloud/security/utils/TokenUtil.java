@@ -34,11 +34,13 @@ public class TokenUtil {
      * @return AccessJwtToken
      **/
     public String createAccessJwtToken(AuthUserDetails authUserDetails) {
-        if (StringUtils.isBlank(authUserDetails.getUsername()))
+        if (StringUtils.isBlank(authUserDetails.getUsername())) {
             throw new IllegalArgumentException("用户名为空无法创建token");
+        }
 
-        if (authUserDetails.getAuthorities() == null || authUserDetails.getAuthorities().isEmpty())
+        if (authUserDetails.getAuthorities() == null || authUserDetails.getAuthorities().isEmpty()) {
             throw new IllegalArgumentException("用户指定任何权限");
+        }
 
         Claims claims = Jwts.claims().setSubject(authUserDetails.getUsername());
 
