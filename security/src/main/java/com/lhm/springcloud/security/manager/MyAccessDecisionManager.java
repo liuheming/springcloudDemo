@@ -25,9 +25,14 @@ import java.util.Collection;
 @Service
 public class MyAccessDecisionManager implements AccessDecisionManager {
 
-    //decide 方法是判定是否拥有权限的决策方法
+    //decide方法判定当前请求路径是否拥有访问权限
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
+        // 对应url没有权限时，直接跳出方法
+        if(configAttributes==null){
+            return;
+        }
+
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         String url, method;
         AntPathRequestMatcher matcher;
@@ -43,7 +48,13 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                         return;
                     }
                 }
+            } else if (ga.getAuthority().equals("ROLE_ANONYMOUS")){
+                //未登录只允许访问 login 页面
+                matcher = new AntPathRequestMatcher("/v1/login");
+                if (matcher.matches(request)) {
+                    return;
             }
+        }
             throw new AccessDeniedException("您没有访问权限");
         }
         throw new AccessDeniedException("鉴权出错");

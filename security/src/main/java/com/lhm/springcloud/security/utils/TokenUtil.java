@@ -3,6 +3,7 @@ package com.lhm.springcloud.security.utils;
 import com.alibaba.fastjson.JSON;
 import com.lhm.springcloud.security.constant.SecurityConstant;
 import com.lhm.springcloud.security.entity.PermissionInfo;
+import com.lhm.springcloud.security.entity.RoleInfo;
 import com.lhm.springcloud.security.pojo.AuthUserDetails;
 import com.lhm.springcloud.security.pojo.Scopes;
 import io.jsonwebtoken.Claims;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 public class TokenUtil {
     /**
      * @Author liuheming
-     * @Description 生成新的token方法
+     * @Description 生成新的token方法，并将角色保存
      * @Date 17:18 2019/5/6
      * @Param [authUserDetails]
      * @return AccessJwtToken
@@ -38,19 +39,12 @@ public class TokenUtil {
             throw new IllegalArgumentException("用户名为空无法创建token");
         }
 
-        if (authUserDetails.getAuthorities() == null || authUserDetails.getAuthorities().isEmpty()) {
-            throw new IllegalArgumentException("用户指定任何权限");
-        }
-
         Claims claims = Jwts.claims().setSubject(authUserDetails.getUsername());
 
-        List<HashMap<String,String>> list=new ArrayList<>();
-        for (PermissionInfo permissionInfo:authUserDetails.getPermissionInfos()) {
-            HashMap<String,String> map=new HashMap<>();
-            map.put("path",permissionInfo.getPath());
-            map.put("method",permissionInfo.getMethod());
-
-            list.add(map);
+        //存入角色信息
+        List<String> list=new ArrayList<>();
+        for (RoleInfo roleInfo:authUserDetails.getRoleInfos()) {
+            list.add(roleInfo.getId());
         }
 
         claims.put(SecurityConstant.AUTHORITIES, JSON.toJSONString(list));

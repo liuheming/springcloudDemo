@@ -3,6 +3,8 @@ package com.lhm.springcloud.security.mapper;
 import com.lhm.springcloud.security.entity.RoleInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,4 +15,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RoleInfoMapper extends BaseMapper<RoleInfo> {
 
+    /**
+     * @Author liuheming
+     * @Description 查询全部角色及对应权限
+     * @Date 16:31 2019/6/13
+     * @Param
+     * @return
+     **/
+    List<RoleInfo> findRoleInfoAndPermission();
 }

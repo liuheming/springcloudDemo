@@ -27,7 +27,7 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
 
     public MyUsernamePasswordAuthenticationFilter() {
         //指定登陆路径
-        super(new AntPathRequestMatcher("/login", "POST"));
+        super(new AntPathRequestMatcher("/v1/login", "POST"));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
                 username, password);
         /*将登陆请求提交给认证 AuthenticationManager管理模块 下的authenticate方法 再由authenticate具体的实现类完成认证服务
-        使用默认提供的DaoAuthenticationProvider 这个用户信息查询及存储实现类  但因为业务需要  */
+        使用默认提供的DaoAuthenticationProvider 这个用户信息查询及存储实现类  */
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 

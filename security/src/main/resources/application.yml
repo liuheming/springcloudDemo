@@ -79,3 +79,4 @@ logging:
 #需要过滤的路径
 ignored:
   urls:
+  - /actuator/**

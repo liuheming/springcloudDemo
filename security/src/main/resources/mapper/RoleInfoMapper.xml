@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lhm.springcloud.security.mapper.RoleInfoMapper">
+    <resultMap id="RoleInfo" type="com.lhm.springcloud.security.entity.RoleInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="role_level" jdbcType="VARCHAR" property="roleLevel"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
 
+        <collection property="permissionInfos" column="id" javaType="ArrayList"
+                    ofType="com.lhm.springcloud.security.entity.PermissionInfo" select="getPermissionInfo"/>
+    </resultMap>
+    <select id="getPermissionInfo" resultType="com.lhm.springcloud.security.entity.PermissionInfo">
+        SELECT
+            spi.*
+        FROM
+          role_info sri
+        INNER JOIN map_role_permission smrp ON smrp.role_id = sri.id
+        INNER JOIN permission_info spi ON smrp.permission_id = spi.id
+        where
+         spi.status = 'enable'
+
+    </select>
+
+    <select id="findRoleInfoAndPermission" resultMap="RoleInfo">
+        SELECT
+            sri.*
+        FROM
+          role_info sri
+        where
+         sri.status = 'enable'
+    </select>
 </mapper>

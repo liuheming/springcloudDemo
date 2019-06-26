@@ -78,6 +78,7 @@
         <module>security</module>
 
         <module>mybatisplusgenerator</module>
+        <module>geteway</module>
     </modules>
 
 </project>

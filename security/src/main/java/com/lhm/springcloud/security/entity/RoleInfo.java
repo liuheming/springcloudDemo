@@ -1,11 +1,13 @@
 package com.lhm.springcloud.security.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -57,5 +59,10 @@ public class RoleInfo implements Serializable {
      */
     private String description;
 
+    /**
+     * 角色权限
+     */
+    @TableField(exist = false)
+    private List<PermissionInfo> permissionInfos;
 
 }

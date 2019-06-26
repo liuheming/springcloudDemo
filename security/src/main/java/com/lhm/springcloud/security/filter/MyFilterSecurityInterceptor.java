@@ -15,12 +15,13 @@ import java.io.IOException;
 /**
  * 权限管理过滤器2
  * 监控用户行为
+ *
  * @author Exrickx
  */
 
 @Component
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
-
+    private static String FILTER_APPLIED = "__spring_security_MyFilterSecurityInterceptor_filterApplied";
     @Autowired
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
@@ -36,12 +37,20 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        //解决同一请求，两次经过过滤器  原因：过滤器被加载WebSecurityConfig和spring都加载了
+        if (request.getAttribute(FILTER_APPLIED) != null) {
+            chain.doFilter(request, response);
+            return ;
+        }
+        //do something
+        request.setAttribute(FILTER_APPLIED,true);
 
         FilterInvocation fi = new FilterInvocation(request, response, chain);
         invoke(fi);
     }
+
     //fi里面有一个被拦截的url
-    //里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
+    //调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
     //再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
     public void invoke(FilterInvocation fi) throws IOException, ServletException {
 
