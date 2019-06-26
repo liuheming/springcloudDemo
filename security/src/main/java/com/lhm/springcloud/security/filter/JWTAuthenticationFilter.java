@@ -33,7 +33,7 @@ import java.util.List;
  * JWT过滤器
  */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
-
+    private static String FILTER_APPLIED = "__spring_security_JWTAuthenticationFilter_filterApplied";
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -41,8 +41,13 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        //解决同一请求，两次经过过滤器  原因：过滤器被加载WebSecurityConfig和spring都加载了
+        if (request.getAttribute(FILTER_APPLIED) != null) {
+            chain.doFilter(request, response);
+            return ;
+        }
+        request.setAttribute(FILTER_APPLIED,true);
 
-        String Requesturl = request.getRequestURI();
         //获取请求头
         String header = request.getHeader(SecurityConstant.HEADER);
         //如果请求头中不存在 或  格式不对  则进入下个过滤器
