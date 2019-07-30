@@ -1,0 +1,18 @@
+server:
+  port: 8999
+spring:
+  profiles:
+    active: dev
+  application:
+    name: admin
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,15 @@
+spring:
+  #consul配置中心设置
+  cloud:
+    consul:
+      host: 172.25.4.13
+      port: 8500
+      enabled: true
+      discovery:
+        enabled: true
+        serviceName: admin
+        port: ${server.port}
+        health-check-path: /actuator/health
+        health-check-interval: 300s
+        tags: admin
+        prefer-ip-address: true

@@ -76,9 +76,9 @@
     <modules>
         <!--安全认证模块-->
         <module>security</module>
-
         <module>mybatisplusgenerator</module>
         <module>geteway</module>
+        <module>admin</module>
     </modules>
 
 </project>
